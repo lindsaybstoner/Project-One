@@ -1,0 +1,76 @@
+body {
+    background-image: url(https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  
+  .container{
+    width: 80%;
+    margin: auto;
+  }
+  
+  .jumbotron {
+    text-align: center;
+    font-family: 'Offside', cursive;
+    color: white;
+  }
+  
+  .header {
+    font-size: 75px;
+  }
+  
+  .btn-primary, .jumbotron, .artistCard {
+    background-color: transparent;
+  }
+  
+  .navButtons, .artistSearch, .card, .lyricsCard {
+    float: left;
+  }
+  
+  .btn-primary {
+    border: solid 2px gray;
+    color: black;
+  }
+  
+  .btn-primary:hover {
+        background-color: lightgray;
+  }
+  
+  .artistSearch {
+    font-family: 'Offside', cursive;
+    font-size: 30px;
+    white-space: nowrap;
+  }
+  
+  .artistCard {
+  padding: 10px;
+  -webkit-box-shadow:0px 0px 81px 30px #b6aeae ;
+  -moz-box-shadow:0px 0px 81px 30px #b6aeae ;
+  box-shadow:0px 0px 81px 30px #b6aeae ;
+  }
+  
+  .artistInfo, .topArtists, .topSongs {
+    font-size: 25px;
+    font-family: 'Offside', cursive;
+    color: white;
+  }
+  
+  .lyricsCard {
+    font-size: 25px;
+    text-align: center;
+    border:5px double #e5dcdc;
+    font-family: 'Roboto Mono', monospace;
+  }
+  
+  h2 {
+    color: white;
+    font-size: 50px;
+    font-family: 'Offside', cursive;
+  }
+  
+  .infoCard {
+  margin-top: 15px;
+  -webkit-box-shadow:0px 0px 66px 14px #f6eeee ;
+  -moz-box-shadow:0px 0px 66px 14px #f6eeee ;
+  box-shadow:0px 0px 66px 14px #f6eeee ;
+  }
