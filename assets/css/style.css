@@ -82,4 +82,16 @@ body.index {
   -webkit-box-shadow:0px 0px 66px 14px #f6eeee ;
   -moz-box-shadow:0px 0px 66px 14px #f6eeee ;
   box-shadow:0px 0px 66px 14px #f6eeee ;
+  display: flex;
   }
+
+  button{
+    margin:10px;
+    background-color: coral;
+}
+#buttons-view{
+  flex-direction: column;
+}
+/* .card-body{
+  display: flex;
+} */
