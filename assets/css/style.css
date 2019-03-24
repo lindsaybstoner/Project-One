@@ -17,6 +17,15 @@ body.index {
     margin: auto;
   }
   
+  .onTour {
+    font-size: 35px;
+    float: right;
+    background-color: whitesmoke;
+    background: rgba(255,255,255,0.5);
+    text-align: center;
+    
+  }
+
   .jumbotron {
     text-align: center;
     font-family: 'Offside', cursive;
