@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Offside" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
     <title>html 2</title>
 </head>
 
@@ -17,27 +18,35 @@
     <div class="container">
         <div class="jumbotron">
             <h1 class="header">Project One 🎵</h1>
+            <div class="artist">
+                <h2>"Artist Name"</h2>
+            </div>
         </div>
-        <div class="artistCard" style="width: 23rem;">
+        <div class="onTour" style="width: 28rem;">
+            <div class="tourCard">
+                <p class="card-text">SHOWS IF/WHERE A BAND IS ON TOUR</p>
+            </div>
+        </div>
+        <div class="artistCard" style="width: 25rem;">
             <img src="https://www.ultimate-guitar.com/static/article/news/5/73755_0_wide_ver1551710924.jpg@642"
                 class="card-img">
             <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    <li class="artistInfo">Artist Name</li>
-                    <li class="artistInfo">Top 5 Songs</li>
-                </ul>
+                <div class="list-group list-group-flush">
+                    <div id="artistInfo">Top 5 Songs</div>
+                    </div>
             </div>
         </div>
-        <div class="audioPreview"></div>
+        <div class="audioPreview">
+            <button type="button" class="btn playButton btn-lg">play</button>
+            <button type="button" class="btn stopButton btn-lg">stop</button>
+
+        </div>
         <br>
         <br>
         <div class="lyricsCard" style="width: 28rem;">
             <div class="card-body">
                 <h2 class="card-title">Lyrics</h2>
-                <p class="lyrics-text">"Scar tissue that I wish you saw,
-                    Sarcastic mister know-it-all,
-                    Close your eyes and I'll kiss you cause,
-                    With the birds I'll share"</p>
+                <p class="lyrics-text"></p>
                 <a href="#" class="card-link"></a>
                 <a href="#" class="card-link"></a>
             </div>

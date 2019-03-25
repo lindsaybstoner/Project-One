@@ -17,12 +17,26 @@ body.index {
     margin: auto;
   }
   
+  .onTour {
+    font-size: 35px;
+    float: right;
+    background-color: whitesmoke;
+    background: rgba(255,255,255,0.5);
+    text-align: center;
+    
+  }
+
   .jumbotron {
     text-align: center;
     font-family: 'Offside', cursive;
     color: white;
   }
   
+  .artist {
+    font-family: 'Roboto Mono', monospace;
+    padding-top: 20px;
+  }
+
   .header {
     font-size: 75px;
   }
@@ -51,18 +65,32 @@ body.index {
   }
   
   .artistCard {
+  text-align: center;
   padding: 10px;
   -webkit-box-shadow:0px 0px 81px 30px #b6aeae ;
   -moz-box-shadow:0px 0px 81px 30px #b6aeae ;
   box-shadow:0px 0px 81px 30px #b6aeae ;
   }
+
+  .card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 60px;
+  }
   
-  .artistInfo, .topArtists, .topSongs {
-    font-size: 25px;
+  .topArtists {
+    font-size: 40px;
     font-family: 'Offside', cursive;
     color: white;
   }
   
+  #artistInfo { 
+    font-size: 40px;
+    font-family: 'Offside', cursive;
+    color: white;
+    padding-left: 10px;
+
+}
+
   .lyricsCard {
     color: white;
     font-size: 25px;
@@ -83,12 +111,33 @@ body.index {
   -moz-box-shadow:0px 0px 66px 14px #f6eeee ;
   box-shadow:0px 0px 66px 14px #f6eeee ;
   display: flex;
+  overflow: auto;
+  }
+
+  .audioPreview {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    -webkit-box-shadow:0px 0px 66px 14px #f6eeee ;
+    -moz-box-shadow:0px 0px 66px 14px #f6eeee ;
+    box-shadow:0px 0px 66px 14px #f6eeee ;
+    width: 25rem;
+  }
+
+  .playButton, .stopButton {
+    color: white;
+    font-size: 30px;
+    border: 2px solid lightgray;
   }
 
   button{
     margin:10px;
-    background-color: coral;
+    background-color: transparent;
+    border: solid 2px lightgray;
+    padding: 10px;
+    display: block;
 }
+
 #buttons-view{
   flex-direction: column;
 }
