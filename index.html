@@ -6,38 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">  
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Offside" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <title>html 1</title>
 </head>
+
 <body class="home">
     <div class="container">
         <div class="jumbotron">
             <h1 class="header">Project One 🎵</h1>
         </div>
 
-    <div class="artistSearch">
-        <label for="artistName">Enter Artist Name</label>
-        <input type="text" class="form-control" id="artistInput">
-        <button type="submit" class="btn btn-primary" id="submitPress">Search</button>
+        <div class="artistSearch">
+            <label for="artistName">Enter Artist Name</label>
+            <input type="text" class="form-control" id="artistInput">
+            <button type="submit" class="btn btn-primary" id="submitPress">Search</button>
+            <br>
+            <div class="infoCard" style="width: 25rem;">
+                <div class="card-body">
+                    <p class="topArtists">Top Artists:</p>
+                    <div id="buttons-view"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="newContainer" style="display: none">
+        <div class="jumbotron">
+            <h1 class="header">Project One 🎵</h1>
+            <div class="artistName">ARTIST NAME</div>
+        </div>
+
+        <div class="tourCard" style="width: 30rem;">
+            <img src="..." class="card-img">
+            <div class="tourBody">
+                <p class="card-text">UPCOMING EVENTS</p>
+                <a href="#" class="btn btn-primary">SEE TOUR DATES</a>
+            </div>
+        </div>
+
+        <div class="artistCard" style="width: 25rem;">
+            <img src="https://www.ultimate-guitar.com/static/article/news/5/73755_0_wide_ver1551710924.jpg@642"
+                class="card-img">
+            <div class="card-body">
+                <div id="artistInfo">Top 3 Songs</div>
+            </div>
+        </div>
+        <div class="audioPreview">
+            <div class="topThree" id="songOne">SONG 1</div>
+            <hr>
+            <div class="topThree" id="songTwo">SONG 2</div>
+            <hr>
+            <div class="topThree" id="songThree">SONG 3</div>
+        </div>
         <br>
-    <div class="infoCard" style="width: 25rem;">
-        <div class="card-body">
-            <p class="topArtists">Top Artists:</p>
-            <form action="index2.html">
-                    <div id="buttons-view"></div> 
-            </form> 
+        <div class="lyricsCard" style="width: 28rem;">
+            <div class="card-body">
+                <h2 class="card-title">Lyrics</h2>
+                <p class="lyrics-text"></p>
+            </div>
+        </div>
     </div>
-    </div>
-    
-    </div>
-    </div>
+
     <script type="text/javascript" src="assets/javascript/project.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 </body>
 </html>

@@ -24,6 +24,16 @@ $(document).ready(function () {
             topics.push(newArtist);
             createButton();
         });
+
+        var $container = $(".container");
+        var $newContainer = $(".newContainer");
+        $("#submitPress").on("click", (function (event) {
+            $container.hide()
+            $('.home').contents().wrapAll('<div id="new-container">');
+            $newContainer.show()
+            document.body.style.backgroundImage = 'url(https://w-dog.net/wallpapers/15/13/472487200286587.jpg)';
+        }));
+
             // Calling the renderButtons function to display the initial list of movies
     createButton();
 })
