@@ -38,24 +38,29 @@
     <div class="newContainer" style="display: none">
         <div class="jumbotron">
             <h1 class="header">Project One 🎵</h1>
-            <div class="artistName">ARTIST NAME</div>
+            <div class="artistName" id="artist-name"></div>
         </div>
 
         <div class="tourCard" style="width: 30rem;">
-            <img src="..." class="card-img">
+            <br>
+            <div class="card-img" id="artist-image"></div>
             <div class="tourBody">
-                <p class="card-text">UPCOMING EVENTS</p>
-                <a href="#" class="btn btn-primary">SEE TOUR DATES</a>
+                <p class="card-text" id="artist-event"></p>
+                <a href="#" class="btn btn-primary" id="artist-tour">SEE TOUR DATES</a>
             </div>
         </div>
 
         <div class="artistCard" style="width: 25rem;">
             <img src="https://www.ultimate-guitar.com/static/article/news/5/73755_0_wide_ver1551710924.jpg@642"
-                class="card-img">
+                 class="card-img">
+        <!-- <div class="tourCardOne" style="width: 30rem;">
+            <br>
+            <div class="card-img" id="artist-image"></div> -->
             <div class="card-body">
                 <div id="artistInfo">Top 3 Songs</div>
             </div>
         </div>
+
         <div class="audioPreview">
             <div class="topThree" id="songOne">SONG 1</div>
             <hr>
@@ -75,4 +80,5 @@
     <script type="text/javascript" src="assets/javascript/project.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
+
 </html>
