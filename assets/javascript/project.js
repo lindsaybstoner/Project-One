@@ -145,6 +145,7 @@ function getArtistInfo(artist) {
 
             lyricsButton
                 .attr("songTitle", info.results[i].trackName)
+                .attr("data-position", i)
                 .addClass("lyrics");
 
 
@@ -173,6 +174,7 @@ function getLyrics(artist) {
 
     $(".lyrics").on("click", function (event) {
         let song = $(this).attr("songTitle");
+        let dataPosition = $(this).attr('data-position')
         console.log(song);
 
         $.ajax({
@@ -182,8 +184,8 @@ function getLyrics(artist) {
             console.log(response);
 
             var printLyrics = $("<p>").text(response.lyrics);
-
-            $(".cardLyrics")
+           
+            $(".song" + dataPosition)
                 .append(printLyrics);
         });
     })
