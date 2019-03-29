@@ -82,3 +82,126 @@ $(document).ready(function () {
         searchBandsInTown(inputArtist);
     });
 })
+
+/** ----------------------------------------------------------------------------------- */
+
+$("#submitPress").on("click", function (event) {
+
+    let artist = $("#artistInput").val().trim();
+
+    let itunesArtist = artist.replace(" ", "+");
+    console.log(itunesArtist);
+
+    getArtistInfo(itunesArtist);
+    //getArtistBio(artist);
+})
+
+let song1 = "";
+let song2 = "";
+let song3 = "";
+
+function getArtistInfo(artist) {
+
+
+    $.ajax({
+        url: "https://itunes.apple.com/search",
+        data: { term: artist, media: "music" },
+        method: "POST"
+    }).then(function (response) {
+
+        const info = JSON.parse(response);
+
+        //var itunesArtistName = $("<h1>").text(info.results[0].artistName);
+
+        song1 = info.results[0].trackName;
+        console.log(song1);
+
+        song2 = info.results[1].trackName;
+        console.log(song2);
+
+        song3 = info.results[2].trackName;
+        console.log(song3);
+
+        artist = info.results[0].artistName;
+        console.log(artist);
+
+        //var itunesArtistImage = $("<img>").attr("src", info.results[0].artworkUrl100);
+        var itunesSongName = "";
+        var itunesArtistAudio = "";
+        var lyricsButton = "";
+        console.log(info.results[0]);
+
+        //$(".artist")
+          //  .append(itunesArtistName);
+
+        //artistImg(artist);
+        
+
+        for (var i = 0; i < 3; i++) {
+            //itunesArtistImage = $("<img>").attr("src", info.results[i].artworkUrl100);
+            itunesSongName = $("<p class='song-name'>").text(info.results[i].trackName);
+            itunesArtistAudio = $("<audio controls>").attr("src", info.results[i].previewUrl);
+            lyricsButton = $("<button>").text("Get Lyrics");
+
+            lyricsButton
+                .attr("songTitle", info.results[i].trackName)
+                .addClass("lyrics");
+
+
+            $(`.song${i}`)
+                .append(itunesSongName)
+                .append(itunesArtistAudio)
+                .append(lyricsButton);
+
+    
+
+        }
+
+        
+        /** events(artist); */
+        getLyrics(artist);
+
+        return info;
+
+    });
+
+}
+
+
+
+function getLyrics(artist) {
+
+    $(".lyrics").on("click", function (event) {
+        let song = $(this).attr("songTitle");
+        console.log(song);
+
+        $.ajax({
+            url: `https://api.lyrics.ovh/v1/${artist}/${song}`,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+
+            var printLyrics = $("<p>").text(response.lyrics);
+
+            $(".cardLyrics")
+                .append(printLyrics);
+        });
+    })
+}
+
+
+
+function getArtistBio (artist) {
+    var queryURL = `https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=${artist}`
+    console.log(queryURL);
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response);
+        console.log(response[2][0]);
+        var printBio = $("<p>").text(response[2][0]);
+        console.log(printBio);
+       
+    })
+}
