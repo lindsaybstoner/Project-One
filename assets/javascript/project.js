@@ -31,7 +31,7 @@ $(document).ready(function () {
         $container.hide()
         $('.home').contents().wrapAll('<div id="new-container">');
         $newContainer.show()
-        document.body.style.backgroundImage = 'url(https://w-dog.net/wallpapers/15/13/472487200286587.jpg)';
+        document.body.style.backgroundImage = 'url(https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80)';
     }));
 
     // Calling the renderButtons function to display the initial list of movies
