@@ -64,7 +64,7 @@ $(document).ready(function () {
             // var artistURL = $("<a>").attr("href", response.url).append(artistName);
             var artistImage = $("<img>").attr("src", response.thumb_url);
             var upcomingEvents = $("<h2>").text(response.upcoming_event_count + " UPCOMING EVENTS");
-            var goToArtist = $("<a>").attr("href", response.url).text("SEE TOUR DATES");
+            var goToArtist = $("<a>").attr("href", response.url).attr("target", "_blank").text("SEE TOUR DATES");
 
             // Empty the contents of all the div's, append the new artist content
             $("#artist-name").empty();
@@ -90,6 +90,7 @@ $(document).ready(function () {
 
         // Running the searchBandsInTown function(passing in the artist as an argument)
         searchBandsInTown(inputArtist);
+        
     });
 })
 
@@ -103,7 +104,7 @@ $("#submitPress").on("click", function (event) {
     console.log(itunesArtist);
 
     getArtistInfo(itunesArtist);
-    //getArtistBio(artist);
+    getArtistBio(artist);
 })
 
 let song1 = "";
@@ -212,7 +213,7 @@ function getArtistBio(artist) {
     }).then(function (response) {
         console.log(response);
         console.log(response[2][0]);
-        var printBio = $("<p>").text(response[2][0]);
+        var printBio = response[2][0];
         console.log(printBio);
 
     })
