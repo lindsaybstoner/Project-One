@@ -1,5 +1,62 @@
 $(document).ready(function () {
-    
+    //============ FIREBASE ADDITION ==================
+    var config = {
+        apiKey: "AIzaSyANMdggKPR4QP1HDE5_T5jgQDVCCsAZVbc",
+        authDomain: "youtunes-58915.firebaseapp.com",
+        databaseURL: "https://youtunes-58915.firebaseio.com",
+        projectId: "youtunes-58915",
+        storageBucket: "youtunes-58915.appspot.com",
+        messagingSenderId: "365049549562"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+    var rankRef = database.ref("/rankings");
+    var name = "";
+
+    $('#submitPress').on('click', function (event) {
+        event.preventDefault();
+
+        name = $('#artistInput').val().trim();
+        var artistName = name;
+        rankRef.once("value", function (snapshot) {
+            console.log(snapshot.val())
+
+            var foundArtist = false;
+            snapshot.forEach(function (item) {
+                console.log(item.val());
+
+                if (artistName === item.val().artist) {
+                    foundArtist = true;
+                    database.ref('/rankings/' + item.val().id).set({
+                        artist: item.val().artist,
+                        popularity: item.val().popularity + 1,
+                        id: item.val().id
+                    })
+                }
+            });
+            if (!foundArtist) {
+                var id = rankRef.push().key
+                database.ref('/rankings/' + id).set({
+                    artist: artistName,
+                    popularity: 1,
+                    id: id
+                });
+            }
+        })
+    });
+
+    rankRef.orderByChild('popularity').limitToLast(3).on('value', function (snapshot) {
+        var topThree = Object.values(snapshot.val());
+        
+        for (var j = 0; j < topThree.length; j++) {
+            console.log(topThree[j].artist);
+            var printButtons =  $("<button>").text(topThree[j].artist);
+            $("#buttons-view").append(printButtons);
+        }
+
+    })
+
+
     var $container = $(".container");
     var $newContainer = $(".newContainer");
     $("#submitPress").on("click", (function (event) {
@@ -16,26 +73,20 @@ $(document).ready(function () {
     }));
 
 
-    function searchBandsInTown(artist) {
+    function artistInformation(artist) {
 
-        // Querying the bandsintown api for the selected artist, the ?app_id parameter is required, but can equal anything
         var queryURL = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-
-            // Printing the entire object to console
             console.log(response);
 
-            // Constructing HTML containing the artist information
             var artistName = $("<h1>").text(response.name);
-            // var artistURL = $("<a>").attr("href", response.url).append(artistName);
             var artistImage = $("<img>").attr("src", response.thumb_url);
-            var upcomingEvents = $("<h2>").text(response.upcoming_event_count + " UPCOMING EVENTS");
+            var upcomingEvents = response.upcoming_event_count + " UPCOMING EVENTS";
             var goToArtist = $("<a>").attr("href", response.url).attr("target", "_blank").text("SEE TOUR DATES");
 
-            // Empty the contents of all the div's, append the new artist content
             $("#artist-name").empty();
             $("#artist-name").append(artistName);
 
@@ -44,24 +95,44 @@ $(document).ready(function () {
 
             $("#artist-event").empty();
             $("#artist-event").append(upcomingEvents);
-
-            $("#artist-tour").empty();
-            $("#artist-tour").append(goToArtist);
         });
     }
 
-    // Event handler for user clicking the select-artist button
+    function events(artist) {
+        var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+
+
+            for (var i = 0; i < 5; i++) {
+                let venue = response[i].venue.name;
+                let date = response[i].datetime;
+                let location = `${response[i].venue.city}, ${response[i].venue.country}`;
+
+                $("#artist-tour").append(`
+                    <tr>
+                        <td>${date}</td>
+                        <td>${venue}</td>
+                        <td>${location}</td>
+                    </tr>
+                `)
+            }
+        });
+    }
+
     $("#submitPress").on("click", function (event) {
-        // Preventing the button from trying to submit the form
         event.preventDefault();
-        // Storing the artist name
         var inputArtist = $("#artistInput").val().trim();
 
-        // Running the searchBandsInTown function(passing in the artist as an argument)
-        searchBandsInTown(inputArtist);
+        // Event handler for user input
+        artistInformation(inputArtist);
+        events(inputArtist);
 
     });
-})
+        })
 
 /** ----------------------------------------------------------------------------------- */
 
@@ -70,7 +141,7 @@ $("#submitPress").on("click", function (event) {
     let artist = $("#artistInput").val().trim();
 
     let itunesArtist = artist.replace(" ", "+");
-    console.log(itunesArtist);
+    //console.log(itunesArtist);
 
     getArtistInfo(itunesArtist);
     getArtistBio(artist);
@@ -94,22 +165,22 @@ function getArtistInfo(artist) {
         //var itunesArtistName = $("<h1>").text(info.results[0].artistName);
 
         song1 = info.results[0].trackName;
-        console.log(song1);
+        //console.log(song1);
 
         song2 = info.results[1].trackName;
-        console.log(song2);
+        //console.log(song2);
 
         song3 = info.results[2].trackName;
-        console.log(song3);
+        //console.log(song3);
 
         artist = info.results[0].artistName;
-        console.log(artist);
+        //console.log(artist);
 
         //var itunesArtistImage = $("<img>").attr("src", info.results[0].artworkUrl100);
         var itunesSongName = "";
         var itunesArtistAudio = "";
         var lyricsButton = "";
-        console.log(info.results[0]);
+        //console.log(info.results[0]);
 
         //$(".artist")
         //  .append(itunesArtistName);
@@ -141,7 +212,7 @@ function getArtistInfo(artist) {
 
         /** events(artist); */
         getLyrics(artist);
-        
+
 
         return info;
 
@@ -155,10 +226,10 @@ function getLyrics(artist) {
 
     $(".lyrics").on("click", function (event) {
         event.preventDefault();
-        
+
         let song = $(this).attr("songTitle");
         let dataPosition = $(this).attr('data-position');
-        
+
         if (!$(this).attr('data-gotLyrics')) {
             $(this).attr('data-gotLyrics', 'true');
             $(this).attr('data-isShown', 'true');
@@ -167,23 +238,23 @@ function getLyrics(artist) {
                 url: `https://api.lyrics.ovh/v1/${artist}/${song}`,
                 method: "GET"
             }).then(function (response) {
-                console.log(response);
-    
+                //console.log(response);
+
                 var printLyrics = $("<p>").text(response.lyrics);
                 printLyrics.addClass("lyricsPrinted")
-    
+
                 $(".song" + dataPosition)
                     .append(printLyrics);
-    
-      
+
+
             });
 
             $(this).text("Hide Lyrics");
         }
 
-        
+
         else {
-            if ($(this).attr('data-isShown') === "true"){
+            if ($(this).attr('data-isShown') === "true") {
                 $(".song" + $(this).attr('data-position')).find(".lyricsPrinted").hide();
                 $(this).attr('data-isShown', 'false');
                 $(this).text("Get Lyrics");
@@ -194,14 +265,14 @@ function getLyrics(artist) {
                 $(this).attr('data-isShown', 'true');
                 $(this).text("Hide Lyrics");
             }
-           
-        }        
 
-       
+        }
 
-        console.log(song);
 
-        
+
+        //console.log(song);
+
+
 
         //hideLyrics();
     })
@@ -217,13 +288,13 @@ function hideLyrics() {
 
 function getArtistBio(artist) {
     var queryURL = `https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=${artist}`
-    console.log(queryURL);
+    //console.log(queryURL);
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response);
-        console.log(response[1]);
+        //console.log(response);
+        //console.log(response[1]);
 
         let peopleWithLabel = response[1];
 
@@ -243,49 +314,3 @@ function getArtistBio(artist) {
 
     })
 }
-//============ FIREBASE ADDITION ==================
-var config = {
-    apiKey: "AIzaSyANMdggKPR4QP1HDE5_T5jgQDVCCsAZVbc",
-    authDomain: "youtunes-58915.firebaseapp.com",
-    databaseURL: "https://youtunes-58915.firebaseio.com",
-    projectId: "youtunes-58915",
-    storageBucket: "youtunes-58915.appspot.com",
-    messagingSenderId: "365049549562"
-};
-firebase.initializeApp(config);
-var database = firebase.database();
-var rankRef = database.ref("/rankings");
-var name = "";
-
-$('#submitPress').on('click', function (event) {
-    event.preventDefault();
-
-    name = $('#artistInput').val().trim();
-    var artistName = name;
-    rankRef.once("value", function (snapshot) {
-        console.log(snapshot.val())
-
-        var foundArtist = false;
-        snapshot.forEach(function (item) {
-            console.log(item.val());
-
-            if (artistName === item.val().artist) {
-                console.log("You searched the same artist!");
-                foundArtist = true;
-                database.ref('/rankings/' + item.val().id).set({
-                    artist: item.val().artist,
-                    popularity: item.val().popularity + 1,
-                    id: item.val().id
-                })
-            }
-        });
-        if (!foundArtist) {
-            var id = rankRef.push().key
-            database.ref('/rankings/' + id).set({
-                artist: artistName,
-                popularity: 1,
-                id: id
-            });
-        }
-    })
-});
