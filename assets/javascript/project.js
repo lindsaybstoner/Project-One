@@ -212,9 +212,23 @@ function getArtistBio(artist) {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        console.log(response[2][0]);
-        var printBio = response[2][0];
-        console.log(printBio);
+        console.log(response[1]);
+        
+        let peopleWithLabel = response[1];
+
+        let hasMusicianLabel = false;
+
+        for (var i = 0; i < peopleWithLabel.length; i++){
+            if (peopleWithLabel[i].includes('(musician)')){
+                $("#bio").append($("<p>").text(response[2][i]));
+                hasMusicianLabel = true;
+            }
+        }
+
+        if (!hasMusicianLabel) {
+            $("#bio").append($("<p>").text(response[2][0]));
+        }
+
 
     })
 }
