@@ -9,7 +9,7 @@ $(document).ready(function () {
         document.body.style.backgroundImage = 'url(https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80)';
     }));
 
-    
+
     // Function to reset page when homeButton is clicked
     $("#homeButton").on("click", (function (event) {
         window.location.href = window.location.href;
@@ -59,7 +59,7 @@ $(document).ready(function () {
 
         // Running the searchBandsInTown function(passing in the artist as an argument)
         searchBandsInTown(inputArtist);
-        
+
     });
 })
 
@@ -141,6 +141,7 @@ function getArtistInfo(artist) {
 
         /** events(artist); */
         getLyrics(artist);
+        
 
         return info;
 
@@ -153,24 +154,65 @@ function getArtistInfo(artist) {
 function getLyrics(artist) {
 
     $(".lyrics").on("click", function (event) {
+        event.preventDefault();
+        
         let song = $(this).attr("songTitle");
-        let dataPosition = $(this).attr('data-position')
+        let dataPosition = $(this).attr('data-position');
+        
+        if (!$(this).attr('data-gotLyrics')) {
+            $(this).attr('data-gotLyrics', 'true');
+            $(this).attr('data-isShown', 'true');
+
+            $.ajax({
+                url: `https://api.lyrics.ovh/v1/${artist}/${song}`,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+    
+                var printLyrics = $("<p>").text(response.lyrics);
+                printLyrics.addClass("lyricsPrinted")
+    
+                $(".song" + dataPosition)
+                    .append(printLyrics);
+    
+      
+            });
+
+            $(this).text("Hide Lyrics");
+        }
+
+        
+        else {
+            if ($(this).attr('data-isShown') === "true"){
+                $(".song" + $(this).attr('data-position')).find(".lyricsPrinted").hide();
+                $(this).attr('data-isShown', 'false');
+                $(this).text("Get Lyrics");
+
+            }
+            else {
+                $(".song" + $(this).attr('data-position')).find(".lyricsPrinted").show();
+                $(this).attr('data-isShown', 'true');
+                $(this).text("Hide Lyrics");
+            }
+           
+        }        
+
+       
+
         console.log(song);
 
-        $.ajax({
-            url: `https://api.lyrics.ovh/v1/${artist}/${song}`,
-            method: "GET"
-        }).then(function (response) {
-            console.log(response);
+        
 
-            var printLyrics = $("<p>").text(response.lyrics);
-
-            $(".song" + dataPosition)
-                .append(printLyrics);
-        });
+        //hideLyrics();
     })
 }
 
+function hideLyrics() {
+    $(".lyrics").on("click", function (event) {
+        $(".lyricsPrinted").empty("");
+
+    });
+}
 
 
 function getArtistBio(artist) {
@@ -182,13 +224,13 @@ function getArtistBio(artist) {
     }).then(function (response) {
         console.log(response);
         console.log(response[1]);
-        
+
         let peopleWithLabel = response[1];
 
         let hasMusicianLabel = false;
 
-        for (var i = 0; i < peopleWithLabel.length; i++){
-            if (peopleWithLabel[i].includes('(musician)')){
+        for (var i = 0; i < peopleWithLabel.length; i++) {
+            if (peopleWithLabel[i].includes('(musician)')) {
                 $("#bio").append($("<p>").text(response[2][i]));
                 hasMusicianLabel = true;
             }
