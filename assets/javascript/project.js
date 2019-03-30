@@ -1,33 +1,5 @@
 $(document).ready(function () {
-    var topics = ["Drake", "Kanye West", "Beyonce", "Cardi B", "Coldplay"];
-
-    //function stores input to data-search and create a button
-    // $("#buttons-view").on("click",function(){
-    function createButton() {
-        //delete prior gifs to add over gif buttons
-        $("#buttons-view").empty();
-        //creates new button, creates gif-button class, and add into array
-        for (var i = 0; i < topics.length; i++) {
-            var a = $("<button>");
-            a.addClass("gif-button");
-            a.attr("data-name", topics[i]);
-            a.text(topics[i]);
-            $("#buttons-view").append(a);
-        }
-        console.log(topics);
-    }
-
-    // This function handles events where the add movie button is clicked
-    $("#submitPress").on("click", function (event) {
-        event.preventDefault();
-        var newArtist = $("#artistInput").val().trim();
-        topics.push(newArtist);
-        createButton();
-    });
-
-
-
-
+    
     var $container = $(".container");
     var $newContainer = $(".newContainer");
     $("#submitPress").on("click", (function (event) {
@@ -43,9 +15,6 @@ $(document).ready(function () {
         window.location.href = window.location.href;
     }));
 
-
-    // Calling the renderButtons function to display the initial list of movies
-    createButton();
 
     function searchBandsInTown(artist) {
 
@@ -232,3 +201,49 @@ function getArtistBio(artist) {
 
     })
 }
+//============ FIREBASE ADDITION ==================
+var config = {
+    apiKey: "AIzaSyANMdggKPR4QP1HDE5_T5jgQDVCCsAZVbc",
+    authDomain: "youtunes-58915.firebaseapp.com",
+    databaseURL: "https://youtunes-58915.firebaseio.com",
+    projectId: "youtunes-58915",
+    storageBucket: "youtunes-58915.appspot.com",
+    messagingSenderId: "365049549562"
+};
+firebase.initializeApp(config);
+var database = firebase.database();
+var rankRef = database.ref("/rankings");
+var name = "";
+
+$('#submitPress').on('click', function (event) {
+    event.preventDefault();
+
+    name = $('#artistInput').val().trim();
+    var artistName = name;
+    rankRef.once("value", function (snapshot) {
+        console.log(snapshot.val())
+
+        var foundArtist = false;
+        snapshot.forEach(function (item) {
+            console.log(item.val());
+
+            if (artistName === item.val().artist) {
+                console.log("You searched the same artist!");
+                foundArtist = true;
+                database.ref('/rankings/' + item.val().id).set({
+                    artist: item.val().artist,
+                    popularity: item.val().popularity + 1,
+                    id: item.val().id
+                })
+            }
+        });
+        if (!foundArtist) {
+            var id = rankRef.push().key
+            database.ref('/rankings/' + id).set({
+                artist: artistName,
+                popularity: 1,
+                id: id
+            });
+        }
+    })
+});
