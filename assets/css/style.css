@@ -26,7 +26,7 @@ body.home {
   }
 
   .header {
-    font-size: 75px;
+    font-size: 80px;
   }
   
   .btn-primary, .jumbotron, .artistCard {
@@ -130,9 +130,9 @@ font-size: 30px;
   width: 40%;
   height: 70px;
   font-size: 35px;
-  color: white;
   background-color: whitesmoke;
   background: rgba(255,255,255,0.5);
+  color: black;
 }
 
 #artist-event {
@@ -159,4 +159,5 @@ font-size: 30px;
   background-color: whitesmoke;
   background: rgba(255,255,255,0.5);
 }
+
 
