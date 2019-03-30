@@ -25,14 +25,24 @@ $(document).ready(function () {
         createButton();
     });
 
+
+
+
     var $container = $(".container");
     var $newContainer = $(".newContainer");
     $("#submitPress").on("click", (function (event) {
         $container.hide()
         $('.home').contents().wrapAll('<div id="new-container">');
         $newContainer.show()
-        document.body.style.backgroundImage = 'url(https://w-dog.net/wallpapers/15/13/472487200286587.jpg)';
+        document.body.style.backgroundImage = 'url(https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80)';
     }));
+
+    
+    // Function to reset page when homeButton is clicked
+    $("#homeButton").on("click", (function (event) {
+        window.location.href = window.location.href;
+    }));
+
 
     // Calling the renderButtons function to display the initial list of movies
     createButton();
@@ -132,10 +142,10 @@ function getArtistInfo(artist) {
         console.log(info.results[0]);
 
         //$(".artist")
-          //  .append(itunesArtistName);
+        //  .append(itunesArtistName);
 
         //artistImg(artist);
-        
+
 
         for (var i = 0; i < 3; i++) {
             //itunesArtistImage = $("<img>").attr("src", info.results[i].artworkUrl100);
@@ -154,11 +164,11 @@ function getArtistInfo(artist) {
                 .append(itunesArtistAudio)
                 .append(lyricsButton);
 
-    
+
 
         }
 
-        
+
         /** events(artist); */
         getLyrics(artist);
 
@@ -184,7 +194,7 @@ function getLyrics(artist) {
             console.log(response);
 
             var printLyrics = $("<p>").text(response.lyrics);
-           
+
             $(".song" + dataPosition)
                 .append(printLyrics);
         });
@@ -193,7 +203,7 @@ function getLyrics(artist) {
 
 
 
-function getArtistBio (artist) {
+function getArtistBio(artist) {
     var queryURL = `https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=${artist}`
     console.log(queryURL);
     $.ajax({
@@ -204,6 +214,6 @@ function getArtistBio (artist) {
         console.log(response[2][0]);
         var printBio = $("<p>").text(response[2][0]);
         console.log(printBio);
-       
+
     })
 }

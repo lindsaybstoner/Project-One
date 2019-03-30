@@ -9,16 +9,15 @@ body.home {
   }
   
   .container{
-    width: 80%;
+    width: 100%;
     margin: auto;
   }
-
 
   .jumbotron {
     text-align: center;
     font-family: 'Offside', cursive;
     color: white;
-    height: 225px;
+    height: 250px;
   }
   
   .artist {
@@ -53,18 +52,6 @@ body.home {
     white-space: nowrap;
   }
   
-  .artistCard {
-  text-align: center;
-  padding: 10px;
-  -webkit-box-shadow:0px 0px 81px 30px #b6aeae ;
-  -moz-box-shadow:0px 0px 81px 30px #b6aeae ;
-  box-shadow:0px 0px 81px 30px #b6aeae ;
-  }
-
-  .card-title {
-    font-family: 'Cinzel', serif;
-    font-size: 60px;
-  }
   
   .topArtists {
     font-size: 40px;
@@ -88,33 +75,32 @@ body.home {
 } */
 
 #new-container {
-  width: 70%;
+  width: 100%;
   margin: auto;
 }
 
 .artistName {
-  align-content: center;
-  display: block;
-  width: 50%;
+font-size: 30px;
+  width: 100%;
   margin: auto;
   margin-top: 15px;
-  font-size: 60px;
   color: black;
-  
+  white-space: nowrap;
 }
 
-.topSongs {
-  width: 30%;
-  margin: auto;
-  background-color: blue;
-}
 
 .card {
   float: left;
-  width: 33.33%;
+  width: 33%;
+  margin: .1rem;
   padding: 5px;
- text-align: center;
+  text-align: center;
+  background-color: whitesmoke;
+  background: rgba(255,255,255,0.5);
+}
 
+#artist-image, #artist-event {
+  margin-bottom: 5px;
 }
 
 .eventsCard {
@@ -123,3 +109,54 @@ body.home {
   font-size: 45px;
   text-align: center;
 }
+
+.tourCard {
+  margin: auto;
+}
+
+.lyrics {
+  font-size: 25px;
+  border: solid 1px black;
+  margin: 0 auto;
+  font-family:'Roboto',sans-serif;
+  font-weight:400;
+  color:#FFFFFF;
+  background-color: lightgrey;
+  box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+  text-align:center;
+}
+
+#artist-tour {
+  width: 40%;
+  height: 70px;
+  font-size: 35px;
+  color: white;
+  background-color: whitesmoke;
+  background: rgba(255,255,255,0.5);
+}
+
+#artist-event {
+  width: 40%;
+  margin: auto;
+  margin-bottom: 5px;
+  font-size: 50px;
+  font-family: 'Rajdhani', sans-serif;
+  color:black;
+  background-color: whitesmoke;
+  background: rgba(255,255,255,0.5);
+}
+
+.song, .cardLyrics, .song-name {
+  font-family: 'Jura', sans-serif;
+}
+
+.cardLyrics, .song-name {
+  font-size: 30px;
+}
+
+#homeButton {
+  color:black;
+  background-color: whitesmoke;
+  background: rgba(255,255,255,0.5);
+}
+
