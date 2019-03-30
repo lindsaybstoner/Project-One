@@ -73,26 +73,20 @@ $(document).ready(function () {
     }));
 
 
-    function searchBandsInTown(artist) {
+    function artistInformation(artist) {
 
-        // Querying the bandsintown api for the selected artist, the ?app_id parameter is required, but can equal anything
         var queryURL = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
+            console.log(response);
 
-            // Printing the entire object to console
-            //console.log(response);
-
-            // Constructing HTML containing the artist information
             var artistName = $("<h1>").text(response.name);
-            // var artistURL = $("<a>").attr("href", response.url).append(artistName);
             var artistImage = $("<img>").attr("src", response.thumb_url);
-            var upcomingEvents = $("<h2>").text(response.upcoming_event_count + " UPCOMING EVENTS");
+            var upcomingEvents = response.upcoming_event_count + " UPCOMING EVENTS";
             var goToArtist = $("<a>").attr("href", response.url).attr("target", "_blank").text("SEE TOUR DATES");
 
-            // Empty the contents of all the div's, append the new artist content
             $("#artist-name").empty();
             $("#artist-name").append(artistName);
 
@@ -101,24 +95,44 @@ $(document).ready(function () {
 
             $("#artist-event").empty();
             $("#artist-event").append(upcomingEvents);
-
-            $("#artist-tour").empty();
-            $("#artist-tour").append(goToArtist);
         });
     }
 
-    // Event handler for user clicking the select-artist button
+    function events(artist) {
+        var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+
+
+            for (var i = 0; i < 5; i++) {
+                let venue = response[i].venue.name;
+                let date = response[i].datetime;
+                let location = `${response[i].venue.city}, ${response[i].venue.country}`;
+
+                $("#artist-tour").append(`
+                    <tr>
+                        <td>${date}</td>
+                        <td>${venue}</td>
+                        <td>${location}</td>
+                    </tr>
+                `)
+            }
+        });
+    }
+
     $("#submitPress").on("click", function (event) {
-        // Preventing the button from trying to submit the form
         event.preventDefault();
-        // Storing the artist name
         var inputArtist = $("#artistInput").val().trim();
 
-        // Running the searchBandsInTown function(passing in the artist as an argument)
-        searchBandsInTown(inputArtist);
+        // Event handler for user input
+        artistInformation(inputArtist);
+        events(inputArtist);
 
     });
-})
+        })
 
 /** ----------------------------------------------------------------------------------- */
 
