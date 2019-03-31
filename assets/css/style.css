@@ -142,6 +142,8 @@ body.home {
   width: 40%;
   height: 60px;
   font-size: 30px;
+  margin: 0 auto;
+  text-align: center;
   background-color: whitesmoke;
   background: rgba(255,255,255,0.5);
   color: black;
@@ -150,7 +152,6 @@ body.home {
 #artist-event {
   width: 40%;
   margin: auto;
-  margin-bottom: 5px;
   font-size: 50px;
   font-family: 'Rajdhani', sans-serif;
   color:black;
@@ -203,4 +204,10 @@ a:hover{
 
 a:active {
   color: black;
+}
+
+table {
+  width: 80%;
+  margin: auto;
+  align-self: center;
 }
