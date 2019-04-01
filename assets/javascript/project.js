@@ -109,7 +109,7 @@ $(document).ready(function () {
 
             for (var i = 0; i < 5; i++) {
                 let venue = response[i].venue.name;
-                let date = response[i].datetime;
+                let date = moment(response[i].datetime).format("MMM Do, YYYY");
                 let location = `${response[i].venue.city}, ${response[i].venue.country}`;
 
                 $("#artist-tour").append(`
