@@ -100,7 +100,7 @@ body.home {
 
 .card {
   float: left;
-  width: 33%;
+  width: 100%;
   margin: .1rem;
   padding: 5px;
   margin-bottom: 15px;
@@ -150,7 +150,7 @@ body.home {
 }
 
 #artist-event {
-  width: 40%;
+  width: 50%;
   margin: auto;
   font-size: 50px;
   font-family: 'Rajdhani', sans-serif;
@@ -207,7 +207,18 @@ a:active {
 }
 
 table {
-  width: 80%;
+  font-size: 20px;
+  word-spacing: normal;
   margin: auto;
-  align-self: center;
+  display: inline;
+  font-family: 'Nova Mono', monospace;
+}
+
+td {
+  padding: 5px 35px 5px 5px;
+  
+}
+
+td, th, tbody {
+  border-bottom: solid 1px darkgray;
 }
