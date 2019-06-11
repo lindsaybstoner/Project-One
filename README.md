@@ -12,7 +12,7 @@ This app connects users to musicians they like and allows them to discover more 
 * [Bootstrap](https://getbootstrap.com/) - CSS framework
 * [Moment.js](https://momentjs.com/) - NPM package to display dates and times in JavaScript
 * [iTunes API](https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/) - retrieved top songs for searched artist
-* [Lyrics.ovh](https://lyricsovh.docs.apiary.io/#) - retrieved lyrics for top three songs from iTunes
+* [Lyrics.ovh API](https://lyricsovh.docs.apiary.io/#) - retrieved lyrics for top three songs from iTunes
 * [BandsinTown API](http://www.artists.bandsintown.com/bandsintown-api) - retrieved tour dates and locations for searched artist
 * [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page) - retrieved bio for searched artist
 
